@@ -9,7 +9,7 @@
     tools:context=".RegisterActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/register_icon"
         android:layout_width="281dp"
         android:layout_height="156dp"
         android:layout_centerHorizontal="true"
@@ -25,7 +25,7 @@
         app:srcCompat="@mipmap/communitylogo_round" />
 
     <EditText
-        android:id="@+id/editTextpasswrd2"
+        android:id="@+id/register-email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="304dp"
@@ -39,7 +39,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextemail"
+        android:id="@+id/register-password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="220dp"
@@ -53,7 +53,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextconfpwrd"
+        android:id="@+id/register-confirm-password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="388dp"
@@ -67,7 +67,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/createaccount"
+        android:id="@+id/register-createaccount"
         android:layout_width="412dp"
         android:layout_height="53dp"
         android:background="@drawable/button"
