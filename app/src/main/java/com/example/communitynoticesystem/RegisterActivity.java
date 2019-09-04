@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -51,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
         String password = UserPassword.getText().toString();
         String confirmPassword = UserConfirmPassword.getText().toString();
 
-        if(TextUtils.isEmpty(email)){
+        if(TextUtils.isEmpty(email)){ // notify the user to enter email if the email field is empty
 
             Toast.makeText(this,"Please Enter Email",Toast.LENGTH_SHORT).show();
         }
@@ -81,6 +82,8 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
+
+                        SendUserToSetupActivity();
                         Toast.makeText(RegisterActivity.this,"You Are Authenticated Successfully..",Toast.LENGTH_SHORT).show();
                         loadingBar.dismiss();
                     }
@@ -94,5 +97,12 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void SendUserToSetupActivity() {
+
+        Intent setupintent = new Intent(RegisterActivity.this, SetupActivity.class);
+        setupintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        finish();
     }
 }
