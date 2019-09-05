@@ -101,7 +101,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void SendUserToSetupActivity() {
 
-        Intent setupintent = new Intent(RegisterActivity.this, SetupActivity.class);
+        Intent setupintent = new Intent(RegisterActivity.this, MainActivity.class);
+        startActivity(setupintent);
         setupintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         finish();
     }
