@@ -63,6 +63,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void SendUserToPostActivity(){
+        Intent addNewPostIntent = new Intent(MainActivity.this,PostActivity.class);
+        startActivity(addNewPostIntent);
+
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -91,9 +97,12 @@ public class MainActivity extends AppCompatActivity {
         UserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
                     if (!dataSnapshot.hasChild(current_user_id)) {
                         SendUserToOrgOrUser();
                     }
+                }
+
 
 
 
@@ -129,6 +138,10 @@ public class MainActivity extends AppCompatActivity {
     private void UserMenuSelector(MenuItem item){
 
         switch(item.getItemId()){
+
+            case R.id.nav_add_post:
+                SendUserToPostActivity();
+                break;
 
             case R.id.nav_profile:
                 Toast.makeText(this,"Profile",Toast.LENGTH_SHORT).show();
