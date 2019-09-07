@@ -88,6 +88,7 @@ public class ComMemSetUp extends AppCompatActivity {
             loadingBar.setCanceledOnTouchOutside(true);
 
             HashMap usermap = new HashMap();
+            usermap.put("type of user","Community Member");
             usermap.put("name",name);
             usermap.put("surname",surname);
             usermap.put("location",location);

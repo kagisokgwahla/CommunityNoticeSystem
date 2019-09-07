@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference UserRef;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-        UserRef = FirebaseDatabase.getInstance().getReference().child("User");
+        UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
         drawerLayout = (DrawerLayout) findViewById(R.id.drawable_layout);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         Intent UserOrgIntent = new Intent(MainActivity.this, Org_or_User.class);
         //UserOrgIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(UserOrgIntent);
-        //finish();
+        finish();
 
     }
 

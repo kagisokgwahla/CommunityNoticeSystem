@@ -50,7 +50,9 @@ public class Org_or_User extends AppCompatActivity {
 
     private void SendToOrgSetUp() {
         Intent sendToOrg = new Intent(Org_or_User.this,OrgSetUp.class);
+        sendToOrg.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(sendToOrg);
+        finish();
 
     }
 }
