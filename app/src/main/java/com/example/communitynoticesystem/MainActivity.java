@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         UserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (!dataSnapshot.hasChild("User")) {
+                    if (!dataSnapshot.hasChild(current_user_id)) {
                         SendUserToOrgOrUser();
                     }
 
