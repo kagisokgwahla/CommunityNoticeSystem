@@ -65,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
         UserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (!dataSnapshot.hasChild(current_user_id)) {
-                        //SendUserToOrgOrUser();
+                    if (!dataSnapshot.hasChild("User")) {
+                        SendUserToOrgOrUser();
                     }
 
 
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void SendUserToOrgOrUser() {
-        Intent UserOrgIntent = new Intent(MainActivity.this, ComMemSetUp.class);
+        Intent UserOrgIntent = new Intent(MainActivity.this, Org_or_User.class);
         //UserOrgIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(UserOrgIntent);
         //finish();
