@@ -24,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private RecyclerView postList;
-
     private FirebaseAuth mAuth;
-    private DatabaseReference UsersRef;
+    private DatabaseReference UserRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-        UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
-
+        UserRef = FirebaseDatabase.getInstance().getReference().child("User");
         drawerLayout = (DrawerLayout) findViewById(R.id.drawable_layout);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -49,34 +48,30 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
-
         super.onStart();
-
         FirebaseUser currentUser = mAuth.getCurrentUser();
-
         if(currentUser== null){
-
             SendUserTologinActivity();
-
         }
 
         else{
-            CheckUserExistance();
+            CheckUserExistence();
+
         }
     }
 
-    private void CheckUserExistance() {
-
-        final String currentuser_id =mAuth.getCurrentUser().getUid();
-
-        UsersRef.addValueEventListener(new ValueEventListener() {
+    private void CheckUserExistence() {
+        final String current_user_id = mAuth.getCurrentUser().getUid();
+        UserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (!dataSnapshot.hasChild(current_user_id)) {
+                        //SendUserToOrgOrUser();
+                    }
 
-                if(!dataSnapshot.hasChild(currentuser_id)){
 
-                    SendUserToSetupActivity();
-                }
+
+
             }
 
             @Override
@@ -84,16 +79,18 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
+
     }
 
-    private void SendUserToSetupActivity() {
+    private void SendUserToOrgOrUser() {
+        Intent UserOrgIntent = new Intent(MainActivity.this, ComMemSetUp.class);
+        //UserOrgIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(UserOrgIntent);
+        //finish();
 
-        Intent setupIntent = new Intent(MainActivity.this, SetupActivity.class);
-        setupIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(setupIntent);
-        finish();
     }
-
 
     private void SendUserTologinActivity() {
 
@@ -130,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_logout:
                 mAuth.signOut();
                 SendUserTologinActivity();
-                Toast.makeText(this,"Logging Out",Toast.LENGTH_SHORT).show();
                 break;
 
 

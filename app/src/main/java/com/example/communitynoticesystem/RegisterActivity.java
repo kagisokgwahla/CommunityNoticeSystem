@@ -48,25 +48,20 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-
     @Override
     protected void onStart() {
         super.onStart();
-
         FirebaseUser currentUser = mAuth.getCurrentUser();
-
         if(currentUser != null){
-
             SendUserToMainActivity();
-
         }
     }
 
     private void SendUserToMainActivity() {
-
-        Intent mainintent = new Intent(RegisterActivity.this, MainActivity.class);
-        mainintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(mainintent);
+        Intent mainIntent = new Intent(RegisterActivity.this,MainActivity.class);
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(mainIntent);
+        finish();
     }
 
     private void CreateNewAccount() {
@@ -105,7 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
 
-                        SendUserToSetupActivity();
+                        SendUserToOrgOrUserActivity();
                         Toast.makeText(RegisterActivity.this,"You Are Authenticated Successfully..",Toast.LENGTH_SHORT).show();
                         loadingBar.dismiss();
                     }
@@ -121,11 +116,11 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    private void SendUserToSetupActivity() {
+    private void SendUserToOrgOrUserActivity() {
 
-        Intent setupintent = new Intent(RegisterActivity.this, MainActivity.class);
-        startActivity(setupintent);
+        Intent setupintent = new Intent(RegisterActivity.this, Org_or_User.class);
         setupintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(setupintent);
         finish();
     }
 }

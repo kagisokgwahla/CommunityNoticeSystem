@@ -24,11 +24,8 @@ public class LoginActivity extends AppCompatActivity {
     private Button LoginButton;
     private EditText UserEmail, UserPassword;
     private TextView NeedNewAccountLink;
-    private ProgressDialog loadingBar;
-
-
     private FirebaseAuth mAuth;
-
+    private ProgressDialog loadingBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,74 +55,73 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
     @Override
     protected void onStart() {
         super.onStart();
-
         FirebaseUser currentUser = mAuth.getCurrentUser();
-
         if(currentUser != null){
-
             SendUserToMainActivity();
-
         }
+
+
     }
 
     private void AllowingUserToLogin() {
-
-        String email =UserEmail.getText().toString();
+        String email = UserEmail.getText().toString();
         String password = UserPassword.getText().toString();
 
         if(TextUtils.isEmpty(email)){
-            Toast.makeText(this,"Please enter your email ...",Toast.LENGTH_SHORT).show();
+
+            Toast.makeText(this,"Enter email address",Toast.LENGTH_SHORT).show();
+
         }
+
         else if(TextUtils.isEmpty(password)){
-           Toast.makeText(this,"Please enter your password ...",Toast.LENGTH_SHORT).show();
+
+            Toast.makeText(this,"Enter password",Toast.LENGTH_SHORT).show();
+
         }
 
         else{
-
-            loadingBar.setTitle("Login");
-            loadingBar.setMessage("Please wait while we are allowing you to login in your account..");
+            loadingBar.setTitle("Login In User");
+            loadingBar.setMessage("Please wait while we create your account..");
             loadingBar.show();
             loadingBar.setCanceledOnTouchOutside(true);
-
-
             mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-
                     if(task.isSuccessful()){
-
                         SendUserToMainActivity();
-
-                        Toast.makeText(LoginActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this,"You have successfully logged in",Toast.LENGTH_SHORT).show();
                         loadingBar.dismiss();
                     }
+                    else{
 
-                    else {
                         String message = task.getException().getMessage();
-                        Toast.makeText(LoginActivity.this,"Error occurred: "+ message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this,"Error Occured: "+message,Toast.LENGTH_SHORT).show();
                         loadingBar.dismiss();
                     }
                 }
             });
+
+
         }
+
+
+
     }
 
     private void SendUserToMainActivity() {
-
-        Intent mainintent = new Intent(LoginActivity.this, MainActivity.class);
-        mainintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(mainintent);
+        Intent mainIntent = new Intent(LoginActivity.this,MainActivity.class);
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(mainIntent);
+        finish();
     }
 
     private void SendUserToRegisterActivity() {
 
         Intent registerIntent = new Intent(LoginActivity.this,RegisterActivity.class);
         startActivity(registerIntent);
-        finish();
 
     }
 }
