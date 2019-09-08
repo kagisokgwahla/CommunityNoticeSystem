@@ -36,4 +36,24 @@ public class Posts {
     public String getUid() {
         return uid;
     }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 }

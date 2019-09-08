@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private RecyclerView postList;
     private FirebaseAuth mAuth;
-    private DatabaseReference UserRef;
+    private DatabaseReference UserRef,PostsRef;
     private Toolbar mToolbar;
 
 
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
-
+        PostsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
         mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Home");
@@ -75,22 +76,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void DisplayAllUserPosts() {
-        FirebaseRecyclerAdapter<Posts,PostsViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Posts, PostsViewHolder>(
-                Posts.class,
-                R.layout.all_post_layout,
-
-        ) {
+        FirebaseRecyclerAdapter<Posts, PostsViewHolder> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<Posts, PostsViewHolder>(
+                        Posts.class,
+                        R.layout.all_post_layout,
+                        PostsViewHolder.class,
+                        PostsRef
+                ) {
             @Override
-            protected void onBindViewHolder(@NonNull PostsViewHolder postsViewHolder, int i, @NonNull Posts posts) {
+            protected void populateViewHolder(PostsViewHolder postsViewHolder, Posts posts, int i) {
+                postsViewHolder.setName(posts.getName());
+                postsViewHolder.setTime(posts.getTime());
+                postsViewHolder.setDate(posts.getDate());
+                posts.setDescription(posts.getDescription());
 
-            }
-
-            @NonNull
-            @Override
-            public PostsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return null;
             }
         };
+
+        postList.setAdapter(firebaseRecyclerAdapter);
 
     }
 
@@ -102,6 +105,31 @@ public class MainActivity extends AppCompatActivity {
             super(itemView);
             mView = itemView;
         }
+
+        public void setName(String name){
+            TextView username = (TextView) mView.findViewById(R.id.post_user_name);
+            username.setText(name);
+
+        }
+
+        public void setTime(String time){
+            TextView post_time = (TextView) mView.findViewById(R.id.post_time);
+            post_time.setText("   "+time);
+        }
+
+        public void setDate(String date){
+            TextView post_date = (TextView) mView.findViewById(R.id.post_date);
+            post_date.setText("   "+date);
+        }
+
+        public void setDescription(String description){
+            TextView post_description2= (TextView) mView.findViewById(R.id.post_description1);
+            post_description2.setText(description);
+
+        }
+
+
+
     }
 
     private void SendUserToPostActivity(){
