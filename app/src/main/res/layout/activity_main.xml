@@ -17,18 +17,6 @@
 
         </include>
 
-        <FrameLayout
-            android:id="@+id/maincontainer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/all_users_postlist"
-                android:layout_width="match_parent"
-                android:layout_height="684dp"
-                android:layout_alignStart="@+id/maincontainer"
-                android:layout_marginTop="50dp" />
-        </FrameLayout>
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView

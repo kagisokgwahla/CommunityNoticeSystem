@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".settings">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/settings_page_toolbar"
+            layout="@layout/app_bar_layout">
+        </include>
+
+    </RelativeLayout>
+    <fragment
+        android:id="@+id/proFeg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <Button
+        android:layout_width="254dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="80dp"
+        android:onClick="onUpdateProfile"
+        android:layout_marginEnd="60dp"
+        android:text="Update Profile" />
+
+    <Button
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:onClick="checkReaminders"
+        android:layout_marginTop="150dp"
+        android:text="Reminders" />
+
+    <Button
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="230dp"
+        android:text="Reports" />
+
+    <Button
+        android:layout_width="258dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:onClick="back"
+        android:layout_marginTop="330dp"
+        android:text="Back" />
+    </fragment>
+
+</RelativeLayout>

@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 
@@ -21,6 +22,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,9 +41,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         mAuth = FirebaseAuth.getInstance();
-        UserRef = FirebaseDatabase.getInstance().getReference().child("User");
+        UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
         mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
@@ -61,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+
     }
 
     @Override
@@ -72,9 +76,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         else{
-            CheckUserExistence();
+
 
         }
+
+
     }
 
     @Override
@@ -88,16 +94,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void CheckUserExistence() {
         final String current_user_id = mAuth.getCurrentUser().getUid();
+
         UserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (!dataSnapshot.hasChild(current_user_id)) {
-                        SendUserToOrgOrUser();
+                      //  SendUserToOrgOrUser();
                     }
-
-
-
-
             }
 
             @Override
@@ -147,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.nav_settings:
-                Toast.makeText(this,"Settings",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this,settings.class));
                 break;
 
             case R.id.nav_logout:
@@ -159,4 +162,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
+
 }
