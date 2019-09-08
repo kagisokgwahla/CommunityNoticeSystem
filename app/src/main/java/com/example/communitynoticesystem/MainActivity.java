@@ -4,15 +4,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -40,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-        UserRef = FirebaseDatabase.getInstance().getReference().child("User");
+        UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
         mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
@@ -52,6 +55,12 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         View navView = navigationView.inflateHeaderView(R.layout.navigation_header);
+        postList = (RecyclerView) findViewById(R.id.all_users_postlist);
+        postList.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        postList.setLayoutManager(linearLayoutManager);
 
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -61,6 +70,38 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        DisplayAllUserPosts();
+    }
+
+    private void DisplayAllUserPosts() {
+        FirebaseRecyclerAdapter<Posts,PostsViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Posts, PostsViewHolder>(
+                Posts.class,
+                R.layout.all_post_layout,
+
+        ) {
+            @Override
+            protected void onBindViewHolder(@NonNull PostsViewHolder postsViewHolder, int i, @NonNull Posts posts) {
+
+            }
+
+            @NonNull
+            @Override
+            public PostsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                return null;
+            }
+        };
+
+    }
+
+    public static class  PostsViewHolder extends RecyclerView.ViewHolder{
+        View mView;
+
+        public PostsViewHolder(@NonNull View itemView) {
+
+            super(itemView);
+            mView = itemView;
+        }
     }
 
     private void SendUserToPostActivity(){
