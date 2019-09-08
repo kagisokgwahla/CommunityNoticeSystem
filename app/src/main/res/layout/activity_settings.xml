@@ -7,49 +7,19 @@
     tools:context=".settings">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="60dp">
         <include
             android:id="@+id/settings_page_toolbar"
             layout="@layout/app_bar_layout">
         </include>
-
     </RelativeLayout>
-    <fragment
-        android:id="@+id/proFeg"
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <Button
-        android:layout_width="254dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="80dp"
-        android:onClick="onUpdateProfile"
-        android:layout_marginEnd="60dp"
-        android:text="Update Profile" />
+        android:layout_height="600dp"
+        android:layout_marginTop="62dp">
 
-    <Button
-        android:layout_width="256dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:onClick="checkReaminders"
-        android:layout_marginTop="150dp"
-        android:text="Reminders" />
-
-    <Button
-        android:layout_width="256dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="230dp"
-        android:text="Reports" />
-
-    <Button
-        android:layout_width="258dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:onClick="back"
-        android:layout_marginTop="330dp"
-        android:text="Back" />
-    </fragment>
+    </androidx.viewpager.widget.ViewPager>
 
 </RelativeLayout>
