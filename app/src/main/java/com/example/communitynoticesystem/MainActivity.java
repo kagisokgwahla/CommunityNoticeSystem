@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference UserRef,PostsRef;
     private Toolbar mToolbar;
 
+    private ImageButton addNewPostButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Home");
+
+        addNewPostButton= (ImageButton) findViewById(R.id.new_post);
+
         drawerLayout = (DrawerLayout) findViewById(R.id.drawable_layout);
         actionBarDrawerToggle =  new ActionBarDrawerToggle(MainActivity.this, drawerLayout, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
@@ -73,7 +79,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
         DisplayAllUserPosts();
+
+        addNewPostButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SendUserToPostActivity();
+            }
+        });
     }
+
+
 
     private void DisplayAllUserPosts() {
         FirebaseRecyclerAdapter<Posts, PostsViewHolder> firebaseRecyclerAdapter =

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/register"
+    android:background="@drawable/green_leaf_background_197129"
     tools:context=".LoginActivity">
 
 
@@ -79,6 +79,7 @@
         android:layout_marginTop="450dp"
         android:fontFamily="casual"
         android:text="Dont have an Account, Need New Account ?"
+        android:textIsSelectable="true"
         android:textAlignment="center"
         android:textColor="#ffffff"
         android:textSize="18sp"
