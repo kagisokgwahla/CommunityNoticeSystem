@@ -79,6 +79,7 @@
         android:layout_marginTop="450dp"
         android:fontFamily="casual"
         android:text="Dont have an Account, Need New Account ?"
+        android:textIsSelectable="true"
         android:textAlignment="center"
         android:textColor="#ffffff"
         android:textSize="18sp"

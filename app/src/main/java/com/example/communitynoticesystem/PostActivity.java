@@ -38,7 +38,7 @@ public class PostActivity extends AppCompatActivity {
     private DatabaseReference userRef, PostRef;
     private FirebaseAuth mAuth;
     private ProgressDialog loadingBar;
-
+    private Toolbar mToolbar;
 
 
     @Override
@@ -46,6 +46,11 @@ public class PostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
+        mToolbar =(Toolbar) findViewById(R.id.update_post_page_toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Update Post");
         mAuth = FirebaseAuth.getInstance();
         current_userID = mAuth.getCurrentUser().getUid();
         UpdateButton = (Button) findViewById(R.id.update_btn);
@@ -65,6 +70,18 @@ public class PostActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int id = item.getItemId();
+
+        if(id == android.R.id.home){
+            SendUserToMainActivity();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     private void ValidatePostInfo() {
         description = PostDescription.getText().toString();
         Calendar calFordDate = Calendar.getInstance();
@@ -79,7 +96,7 @@ public class PostActivity extends AppCompatActivity {
 
         if(TextUtils.isEmpty(description)){
 
-            Toast.makeText(this,"Tell Us Something",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Please Write Something",Toast.LENGTH_SHORT).show();
 
         }
 

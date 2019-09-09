@@ -29,6 +29,21 @@
                 android:layout_alignStart="@+id/maincontainer"
                 android:layout_marginTop="50dp" />
         </FrameLayout>
+
+        <ImageButton
+            android:id="@+id/new_post"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/add_post"
+            android:layout_alignParentEnd="true"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="4dp"
+            android:layout_marginRight="12dp"
+            android:background="@color/colorPrimaryDark"
+            android:baselineAlignBottom="false"
+            android:focusableInTouchMode="false"
+            />
+
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
