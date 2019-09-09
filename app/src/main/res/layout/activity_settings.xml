@@ -5,20 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".settings">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp">
-        <include
-            android:id="@+id/settings_page_toolbar"
-            layout="@layout/app_bar_layout">
-        </include>
-    </RelativeLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:layout_marginTop="62dp">
+        android:layout_height="match_parent">
 
     </androidx.viewpager.widget.ViewPager>
 
