@@ -15,7 +15,6 @@
         <activity android:name=".ComMemSetUp" />
         <activity android:name=".OrgSetUp" />
         <activity android:name=".Org_or_User" />
-        <activity android:name=".SetupActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity">

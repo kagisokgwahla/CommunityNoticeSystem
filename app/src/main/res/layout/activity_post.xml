@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/register"
+    android:background="@drawable/green_leaf_background_197129"
     tools:context=".PostActivity">
 
     <include
@@ -45,7 +45,6 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@color/colorPrimaryDark"
         android:padding="10dp"
         android:text="Update Post"
         app:layout_constraintBottom_toBottomOf="parent"

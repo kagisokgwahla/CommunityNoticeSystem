@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -60,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
 
         googleSignInButton =(ImageView) findViewById(R.id.google_sign_in);
 
+        NeedNewAccountLink.setPaintFlags(NeedNewAccountLink.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         NeedNewAccountLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
