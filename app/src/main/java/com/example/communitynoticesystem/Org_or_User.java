@@ -23,20 +23,14 @@ public class Org_or_User extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 SendToOrgSetUp();
-
-
-
             }
         });
-
         btnUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SendToUserSetUp();
             }
         });
-
-
     }
 
     private void SendToUserSetUp() {
@@ -44,8 +38,6 @@ public class Org_or_User extends AppCompatActivity {
         sendToCom.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(sendToCom);
         finish();
-
-
     }
 
     private void SendToOrgSetUp() {
