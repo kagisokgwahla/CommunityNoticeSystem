@@ -229,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.nav_settings:
-                Toast.makeText(this,"Settings",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this,settings.class));
                 break;
 
             case R.id.nav_logout:

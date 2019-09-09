@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:weightSum="100">
+
+    <TextView
+        android:id="@+id/postDiscription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="khfeugd nfwiug7d ihgfw7 nidwh8g7"
+        android:textSize="25sp"
+        android:layout_weight="35"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="65"
+        android:weightSum="100">
+
+        <Button
+            android:id="@+id/comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comment"
+            android:textSize="20sp"
+            android:layout_weight="50"/>
+
+        <Button
+            android:id="@+id/report"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Report"
+            android:textSize="20sp"
+            android:layout_weight="50"/>
+    </LinearLayout>
+</LinearLayout>
