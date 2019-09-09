@@ -4,15 +4,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private RecyclerView postList;
     private FirebaseAuth mAuth;
-    private DatabaseReference UserRef;
+    private DatabaseReference UserRef,PostsRef;
     private Toolbar mToolbar;
 
 
@@ -40,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-        UserRef = FirebaseDatabase.getInstance().getReference().child("User");
-
+        UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        PostsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
         mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Home");
@@ -52,6 +56,12 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         View navView = navigationView.inflateHeaderView(R.layout.navigation_header);
+        postList = (RecyclerView) findViewById(R.id.all_users_postlist);
+        postList.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        postList.setLayoutManager(linearLayoutManager);
 
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -61,6 +71,71 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        DisplayAllUserPosts();
+    }
+
+    private void DisplayAllUserPosts() {
+        FirebaseRecyclerAdapter<Posts, PostsViewHolder> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<Posts, PostsViewHolder>(
+                        Posts.class,
+                        R.layout.all_post_layout,
+                        PostsViewHolder.class,
+                        PostsRef
+                ) {
+            @Override
+            protected void populateViewHolder(PostsViewHolder postsViewHolder, Posts posts, int i) {
+                postsViewHolder.setName(posts.getName());
+                postsViewHolder.setTime(posts.getTime());
+                postsViewHolder.setDate(posts.getDate());
+                posts.setDescription(posts.getDescription());
+
+            }
+        };
+
+        postList.setAdapter(firebaseRecyclerAdapter);
+
+    }
+
+    public static class  PostsViewHolder extends RecyclerView.ViewHolder{
+        View mView;
+
+        public PostsViewHolder(@NonNull View itemView) {
+
+            super(itemView);
+            mView = itemView;
+        }
+
+        public void setName(String name){
+            TextView username = (TextView) mView.findViewById(R.id.post_user_name);
+            username.setText(name);
+
+        }
+
+        public void setTime(String time){
+            TextView post_time = (TextView) mView.findViewById(R.id.post_time);
+            post_time.setText("   "+time);
+        }
+
+        public void setDate(String date){
+            TextView post_date = (TextView) mView.findViewById(R.id.post_date);
+            post_date.setText("   "+date);
+        }
+
+        public void setDescription(String description){
+            TextView post_description2= (TextView) mView.findViewById(R.id.post_description1);
+            post_description2.setText(description);
+
+        }
+
+
+
+    }
+
+    private void SendUserToPostActivity(){
+        Intent addNewPostIntent = new Intent(MainActivity.this,PostActivity.class);
+        startActivity(addNewPostIntent);
+
     }
 
     @Override
@@ -91,9 +166,12 @@ public class MainActivity extends AppCompatActivity {
         UserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
                     if (!dataSnapshot.hasChild(current_user_id)) {
                         SendUserToOrgOrUser();
                     }
+                }
+
 
 
 
@@ -129,6 +207,10 @@ public class MainActivity extends AppCompatActivity {
     private void UserMenuSelector(MenuItem item){
 
         switch(item.getItemId()){
+
+            case R.id.nav_add_post:
+                SendUserToPostActivity();
+                break;
 
             case R.id.nav_profile:
                 Toast.makeText(this,"Profile",Toast.LENGTH_SHORT).show();
