@@ -11,9 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".clickPostActivity"></activity>
+        <activity android:name=".AdminActivity"></activity>
+        <activity android:name=".clickPostActivity" />
         <activity android:name=".PostActivity" />
-        <activity android:name=".settings"></activity>
+        <activity android:name=".settings" />
         <activity android:name=".ComMemSetUp" />
         <activity android:name=".OrgSetUp" />
         <activity android:name=".Org_or_User" />

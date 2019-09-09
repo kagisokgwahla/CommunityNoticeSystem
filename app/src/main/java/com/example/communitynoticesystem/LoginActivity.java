@@ -82,6 +82,31 @@ public class LoginActivity extends AppCompatActivity {
 
         }
 
+        else if(password.equals("123456") && email.equals("admin@gmail.com")){
+            loadingBar.setTitle("Login In Admin");
+            loadingBar.setMessage("Please wait while we login you in the account..");
+            loadingBar.show();
+            loadingBar.setCanceledOnTouchOutside(true);
+            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()){
+                        SendToAdmin();
+                        Toast.makeText(LoginActivity.this,"You have successfully logged in",Toast.LENGTH_SHORT).show();
+                        loadingBar.dismiss();
+                    }
+                    else{
+
+                        String message = task.getException().getMessage();
+                        Toast.makeText(LoginActivity.this,"Error Occured: "+message,Toast.LENGTH_SHORT).show();
+                        loadingBar.dismiss();
+                    }
+                }
+            });
+
+
+        }
+
         else{
             loadingBar.setTitle("Login In User");
             loadingBar.setMessage("Please wait while we create your account..");
@@ -116,6 +141,14 @@ public class LoginActivity extends AppCompatActivity {
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(mainIntent);
         finish();
+    }
+
+    private void SendToAdmin(){
+        Intent adminIntent = new Intent (LoginActivity.this, AdminActivity.class);
+        adminIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(adminIntent);
+        finish();
+
     }
 
     private void SendUserToRegisterActivity() {
