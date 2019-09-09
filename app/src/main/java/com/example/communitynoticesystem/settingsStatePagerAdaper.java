@@ -19,6 +19,10 @@ public class settingsStatePagerAdaper extends FragmentStatePagerAdapter {
         mFragmentTitle.add(title);
     }
 
+    public String getTitle(int position){
+        return mFragmentTitle.get(position);
+    }
+
     @Override
     public Fragment getItem(int position) {
         return mFragmentList.get(position);
