@@ -136,7 +136,7 @@ public class clickPostActivity extends AppCompatActivity {
                 if(dataSnapshot.exists()){
                     String userName = dataSnapshot.child("name").getValue().toString();
                     String location1 = dataSnapshot.child("location").getValue().toString();
-
+                    String descrip = dataSnapshot.child("description").getValue().toString();
 
                     HashMap reportMap = new HashMap();
                     reportMap.put("uid",currentUserID);
