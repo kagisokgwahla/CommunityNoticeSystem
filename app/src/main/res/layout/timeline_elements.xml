@@ -29,7 +29,7 @@
             android:layout_weight="50"/>
 
         <Button
-            android:id="@+id/report"
+            android:id="@+id/reports"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Report"
