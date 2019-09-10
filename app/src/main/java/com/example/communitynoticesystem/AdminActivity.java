@@ -17,7 +17,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class AdminActivity extends AppCompatActivity {
-    private Button logoutadmin;
+    private Button logoutadmin,Reportbtn;
     private FirebaseAuth mAuth;
 
     @Override
@@ -26,12 +26,24 @@ public class AdminActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin);
         mAuth = FirebaseAuth.getInstance();
         logoutadmin = (Button) findViewById(R.id.logout_admin);
+        Reportbtn = (Button) findViewById(R.id.reports);
 
         logoutadmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mAuth.signOut();
                 SendUserTologinActivity();
+            }
+        });
+
+        Reportbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent loginIntent = new Intent(AdminActivity.this, reportAdminActivity.class);
+                loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(loginIntent);
+                finish();
+
             }
         });
 
