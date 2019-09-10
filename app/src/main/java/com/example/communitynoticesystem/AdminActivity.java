@@ -17,7 +17,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class AdminActivity extends AppCompatActivity {
-    private Button logoutadmin;
+    private Button logoutadmin,Report, Main;
     private FirebaseAuth mAuth;
 
     @Override
@@ -26,6 +26,8 @@ public class AdminActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin);
         mAuth = FirebaseAuth.getInstance();
         logoutadmin = (Button) findViewById(R.id.logout_admin);
+        Report = (Button) findViewById(R.id.reports);
+        Main = (Button) findViewById(R.id.Main_Screen);
 
         logoutadmin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,6 +36,33 @@ public class AdminActivity extends AppCompatActivity {
                 SendUserTologinActivity();
             }
         });
+
+        Report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent loginIntent = new Intent(AdminActivity.this, reportAdminActivity.class);
+
+                startActivity(loginIntent);
+
+
+            }
+        });
+
+        Main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent loginIntent = new Intent(AdminActivity.this, MainActivity.class);
+
+                startActivity(loginIntent);
+
+            }
+        });
+
+
+
+
 
 
 
