@@ -47,7 +47,7 @@
                     android:padding="2dp">
 
                     <TextView
-                        android:id="@+id/text55"
+                        android:id="@+id/post_location"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="posted at"
@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
-            android:textSize="14sp"
+            android:textSize="20sp"
             android:textColor="@android:color/black"/>
 
 

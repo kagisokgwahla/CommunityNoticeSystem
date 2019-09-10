@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 postsViewHolder.setTime(posts.getTime());
                 postsViewHolder.setDate(posts.getDate());
                 postsViewHolder.setDescription(posts.getDescription());
+                postsViewHolder.setLocation(posts.getLocation());
 
 
                 postsViewHolder.mView.setOnClickListener(new View.OnClickListener() {
@@ -152,6 +153,12 @@ public class MainActivity extends AppCompatActivity {
         public void setDescription(String description){
             TextView post_description2= (TextView) mView.findViewById(R.id.post_description1);
             post_description2.setText(description);
+
+        }
+
+        public void setLocation(String location){
+            TextView post_location = (TextView) mView.findViewById(R.id.post_location);
+            post_location.setText(location);
 
         }
 
@@ -243,9 +250,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this,"Profile",Toast.LENGTH_SHORT).show();
                 break;
 
-            case R.id.nav_home:
-                Toast.makeText(this,"Home",Toast.LENGTH_SHORT).show();
-                break;
 
             case R.id.nav_community:
                 Toast.makeText(this,"Community",Toast.LENGTH_SHORT).show();

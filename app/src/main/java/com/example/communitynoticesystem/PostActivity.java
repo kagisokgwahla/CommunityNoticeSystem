@@ -33,7 +33,7 @@ public class PostActivity extends AppCompatActivity {
 
     private Button UpdateButton;
     private EditText PostDescription;
-    private String description;
+    private String description, location;
     private  String saveCurrentDate, saveCurrenttime, postRandomName,current_userID;
     private DatabaseReference userRef, PostRef;
     private FirebaseAuth mAuth;
@@ -117,6 +117,7 @@ public class PostActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     String userName = dataSnapshot.child("name").getValue().toString();
+                    String location1 = dataSnapshot.child("location").getValue().toString();
 
                     HashMap postMap = new HashMap();
                     postMap.put("uid",current_userID);
@@ -124,6 +125,8 @@ public class PostActivity extends AppCompatActivity {
                     postMap.put("time",saveCurrenttime);
                     postMap.put("description",description);
                     postMap.put("name",userName);
+                    postMap.put("location",location1);
+
 
                     PostRef.child(current_userID+postRandomName).updateChildren(postMap).addOnCompleteListener(new OnCompleteListener() {
                         @Override

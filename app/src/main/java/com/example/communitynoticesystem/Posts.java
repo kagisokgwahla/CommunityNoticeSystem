@@ -2,19 +2,28 @@ package com.example.communitynoticesystem;
 
 public class Posts {
 
-    public String uid, time, date, description,name;
+    public String uid, time, date, description,name,location;
     public Posts(){
 
     }
 
-    public Posts(String uid, String time, String date, String description, String name){
+    public Posts(String uid, String time, String date, String description, String name,String location){
         this.uid = uid;
         this.time = time;
         this.date = date;
         this.description = description;
         this.name = name;
+        this.location = location;
 
 
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getDate() {
